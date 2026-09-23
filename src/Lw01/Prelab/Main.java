@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         List<PrintJob> jobs = new ArrayList<>();
  
-        try (Scanner scanner = new Scanner(new File("jobs.txt"))) {
+        try (Scanner scanner = new Scanner(new File("C:\\Users\\faza\\OneDrive\\Dokumen\\ASD\\dsa-5026251130\\src\\Lw01\\Prelab\\jobs.txt"))) {
             while (scanner.hasNext()) {
                 String type = scanner.next();
                 String id = scanner.next();
@@ -27,7 +27,6 @@ public class Main {
             return;
         }
  
-        // Runtime polymorphism: one loop, no instanceof / casts / type checks.
         for (PrintJob job : jobs) {
             System.out.println(job.summary());
         }
