@@ -11,7 +11,7 @@ public class Monoprint extends PrintJob {
     public int calculateCharge() {
         return getPages() * RATE_PER_PAGE;
     }
- 
+
     @Override
     public String label() {
         return "Mono";

@@ -23,7 +23,6 @@ public abstract class PrintJob implements Chargeable {
     @Override
     public abstract int calculateCharge();
  
-    // Overload: same name, different parameter list. Implemented once here.
     public int calculateCharge(int copies) {
         if (copies <= 0) {
             throw new IllegalArgumentException("copies must be positive");
@@ -35,7 +34,6 @@ public abstract class PrintJob implements Chargeable {
         return "Print";
     }
  
-    // Not overridden in subclasses: label() and calculateCharge() are resolved at runtime.
     public String summary() {
         return id + " | " + label() + " | " + calculateCharge();
     }
