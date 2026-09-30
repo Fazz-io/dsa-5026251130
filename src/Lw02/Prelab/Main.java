@@ -1,25 +1,24 @@
 package Lw02.Prelab;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
  
+
 public class Main {
     public static void main(String[] args) {
         LinkedList<String[]> transactions = new LinkedList<>();
         LinkedList<String[]> customers = new LinkedList<>();
- 
-        try (Scanner scanner = new Scanner(new File("C:\\Users\\faza\\OneDrive\\Dokumen\\ASD\\dsa-5026251130\\src\\Lw02\\Prelab\\transactions.txt"))) {
+
+        try (Scanner scanner = new Scanner(Main.class.getResourceAsStream("transactions.txt"))) {
             while (scanner.hasNext()) {
                 String name = scanner.next();
                 String type = scanner.next();
                 String amount = scanner.next();
- 
+
                 transactions.add(new String[]{name, type, amount});
- 
+
                 boolean exists = false;
                 for (String[] customer : customers) {
                     if (customer[0].equals(name)) {
@@ -31,22 +30,19 @@ public class Main {
                     customers.add(new String[]{name, "0"});
                 }
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("File transactions.txt not found.");
-            return;
         }
- 
+
         Queue<String[]> queue = new LinkedList<>();
         queue.addAll(transactions);
- 
+
         Stack<String[]> failed = new Stack<>();
- 
+
         while (!queue.isEmpty()) {
             String[] tx = queue.poll();
             String name = tx[0];
             String type = tx[1];
             int amount = Integer.parseInt(tx[2]);
- 
+
             String[] customer = null;
             for (String[] c : customers) {
                 if (c[0].equals(name)) {
@@ -54,9 +50,9 @@ public class Main {
                     break;
                 }
             }
- 
+
             int balance = Integer.parseInt(customer[1]);
- 
+
             if (type.equals("DEPOSIT")) {
                 balance += amount;
                 customer[1] = String.valueOf(balance);
@@ -69,12 +65,12 @@ public class Main {
                 }
             }
         }
- 
+
         System.out.println("=== Final Balances ===");
         for (String[] customer : customers) {
             System.out.println(customer[0] + " : " + customer[1]);
         }
- 
+
         System.out.println();
         System.out.println("=== Failed Transactions ===");
         while (!failed.isEmpty()) {
